@@ -1,0 +1,15 @@
+# --- Web framework / server ---
+fastapi>=0.110.0
+#uvicorn[standard]>=0.27.0
+
+# --- Data validation ---
+#pydantic>=2.6.0
+
+# --- NLP / inference ---
+#transformers>=4.38.0
+#torch>=2.2.0
+
+# NOTE on installing torch:
+# `pip install torch` pulls the default build for your platform. On a CPU-only
+# machine you can install a smaller CPU wheel instead, e.g.:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
