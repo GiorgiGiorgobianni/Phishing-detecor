@@ -8,7 +8,7 @@
 phishing-detector/
 ├── backend/
 │   ├── main.py            # FastAPI: POST /api/v1/analyze, GET /health
-│   ├── model.py           # DistilBERT
+│   ├── model.py           # bert-finetuned-phishing
 │   ├── schemas.py         # Pydantic request/response მოდელები
 │   └── requirements.txt
 └── extension/
@@ -36,7 +36,7 @@ python main.py            # ან : uvicorn main:app --port 8000
 
 - `POST http://localhost:8000/api/v1/analyze`
 - `GET  http://localhost:8000/health`
-- Interactive docs: `http://localhost:8000/docs`
+
 
 გატესტვა:
 
@@ -56,15 +56,7 @@ curl -X POST http://localhost:8000/api/v1/analyze \
 
 ## როგორ მუშაობს
 
-```
-Gmail/Outlook DOM
-   │  (content.js აექსტრაქტებს შიგთავსს და გამომგზავნის ელ-ფოსტის მისამართს)
-   ▼
-chrome.runtime.sendMessage  ──►  background.js  ──►  POST /api/v1/analyze
-   ▲                                                        │
-   │  (ბანერი გამოდის თუ მეილს აღიქვამს "flagged")         ▼
-content.js  ◄───────────────────────────────────  { phishing_probability, status, reason }
-```
+
 ბექენდში არსებული POST მოთხოვნის ჰენდლერი არის ასინქრონული; CPU-bound მოდელის forward pass მუშავდება ცალკე ვორქერ thread-ში(run_in_threadpool), რათა ივენთ ლუფმა იმუშაოს და latency შეძლებისდაგვარად დაბალი შეინარჩუნოს.
 
 
