@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Phishing Detector</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        width: 260px;
+        margin: 0;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+          sans-serif;
+        color: #1f2933;
+        background: #ffffff;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .header .shield {
+        color: #c62828;
+        display: flex;
+      }
+      .header h1 {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 0;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-top: 1px solid #eef0f2;
+      }
+      .row .label {
+        font-size: 13px;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #b0b8c1;
+      }
+      .dot.online {
+        background: #2e7d32;
+      }
+      .dot.offline {
+        background: #c62828;
+      }
+      /* სვიჩი */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 22px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background: #cfd4da;
+        border-radius: 22px;
+        transition: background 150ms ease;
+      }
+      .slider::before {
+        content: "";
+        position: absolute;
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        top: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 150ms ease;
+      }
+      input:checked + .slider {
+        background: #2e7d32;
+      }
+      input:checked + .slider::before {
+        transform: translateX(18px);
+      }
+      .hint {
+        margin-top: 12px;
+        font-size: 11px;
+        color: #7b8794;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <span class="shield">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+          <path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z" />
+        </svg>
+      </span>
+      <h1>AI Phishing Detector</h1>
+    </div>
+
+    <div class="row">
+      <span class="label">Scan opened emails</span>
+      <label class="switch">
+        <input type="checkbox" id="enabled" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="row">
+      <span class="label">Backend</span>
+      <span class="status">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">Checking…</span>
+      </span>
+    </div>
+
+    <p class="hint">
+      Emails are analyzed by your local backend on localhost:8000. Nothing is
+      stored or logged.
+    </p>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
