@@ -9,9 +9,9 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 logger = logging.getLogger(__name__)
 
 # --- კონფიგურაცია
-MODEL_NAME = "distilbert-base-uncased-finetuned-sst-2-english"
+MODEL_NAME = "ealvaradob/bert-finetuned-phishing"
 # HuggingFace მოდელის იდენტიფიკატორი
-PHISHING_LABEL_INDEX = 0
+PHISHING_LABEL_INDEX = 1
 # ფიშინგის შეფასების დეფაულტ ინდექსი
 
 # მოდელისთვის გამოყენებადი ტოკენების მაქსიმალური რაოდენობა
