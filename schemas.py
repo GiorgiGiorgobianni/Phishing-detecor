@@ -1,8 +1,4 @@
 """Request/response data contracts for the analysis API.
-
-These Pydantic models define and validate the JSON payloads exchanged with the
-browser extension. Keeping them in one place makes the API contract explicit and
-gives us automatic validation + OpenAPI docs for free.
 """
 
 from __future__ import annotations
@@ -11,13 +7,12 @@ from pydantic import BaseModel, Field
 
 
 class AnalyzeRequest(BaseModel):
-    """Payload sent by the extension for a single email."""
+    """ფეილოუდი რომელოც იგზავნება გაფართოებიდან"""
 
     email_body: str = Field(
         ...,
         description="Plain-text body of the email to analyze.",
-        # An empty body is tolerated and treated as low risk rather than rejected,
-        # so a flaky DOM scrape never breaks the user's inbox.
+        # ცარიელი მეილი აღიღმება როგორც უსაფრთხო, და არ არის უარყოფილი
         min_length=0,
         max_length=100_000,
     )
@@ -29,7 +24,7 @@ class AnalyzeRequest(BaseModel):
 
 
 class AnalyzeResponse(BaseModel):
-    """Structured verdict returned to the extension."""
+    """სტრუქტურირებული დასკვნა"""
 
     phishing_probability: float = Field(
         ...,
@@ -48,7 +43,7 @@ class AnalyzeResponse(BaseModel):
 
 
 class HealthResponse(BaseModel):
-    """Lightweight health/readiness signal used by the extension popup."""
+    """კავშირის სტატუსი"""
 
     status: str
     model_loaded: bool
